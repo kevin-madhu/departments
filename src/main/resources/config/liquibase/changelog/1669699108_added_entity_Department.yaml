@@ -1,0 +1,55 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: kevin
+      changes:
+          - createTable:
+              tableName: department
+              columns:
+                - column:
+                    name: id
+                    type: int
+                    constraints:
+                      primaryKey: true
+                      nullable: false
+                - column:
+                   name: name
+                   type: nvarchar(150)
+                   constraints:
+                     nullable: false
+                - column:
+                   name: parent_id
+                   type: int
+                   constraints:
+                     nullable: true
+                - column:
+                    name: dt_from
+                    type: datetime
+                    constraints:
+                      nullable: false
+                - column:
+                    name: dt_till
+                    type: datetime
+                    constraints:
+                      nullable: true
+                - column:
+                    name: sort_priority
+                    type: int
+                    constraints:
+                      nullable: false
+                - column:
+                    name: is_system
+                    type: bit
+                    defaultValue: 0
+                    constraints:
+                      nullable: false
+                - column:
+                    name: creation_date
+                    type: datetime
+                    constraints:
+                      nullable: false
+                - column:
+                    name: correction_date
+                    type: datetime
+                    constraints:
+                      nullable: true

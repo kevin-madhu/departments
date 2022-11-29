@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1669699108-2
+      author: kevin
+      changes:
+          - addForeignKeyConstraint:
+              baseColumnNames: parent_id
+              baseTableName: department
+              constraintName: fk_department__parent_id
+              referencedColumnNames: id
+              referencedTableName: department
