@@ -12,6 +12,8 @@
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <org.mapstruct.version>1.5.3.Final</org.mapstruct.version>
+        <liquibase.version>4.15.0</liquibase.version>
     </properties>
 
     <parent>
@@ -28,23 +30,40 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.liquibase</groupId>
-            <artifactId>liquibase-core</artifactId>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct</artifactId>
+            <version>${org.mapstruct.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.hazelcast</groupId>
+            <artifactId>hazelcast</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.hazelcast</groupId>
+            <artifactId>hazelcast-hibernate53</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.hazelcast</groupId>
+            <artifactId>hazelcast-spring</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <scope>provided</scope>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
             <scope>runtime</scope>
             <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -53,13 +72,81 @@
         </dependency>
     </dependencies>
 
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-devtools</artifactId>
+                    <optional>true</optional>
+                </dependency>
+                <dependency>
+                    <groupId>com.h2database</groupId>
+                    <artifactId>h2</artifactId>
+                </dependency>
+            </dependencies>
+            <build>
+                <pluginManagement>
+                    <plugins>
+                        <plugin>
+                            <groupId>org.liquibase</groupId>
+                            <artifactId>liquibase-maven-plugin</artifactId>
+                            <version>${liquibase.version}</version>
+                            <configuration>
+                                <changeLogFile>${project.basedir}/src/main/resources/config/liquibase/master.xml</changeLogFile>
+                                <diffChangeLogFile>${project.basedir}/src/main/resources/config/liquibase/changelog/${maven.build.timestamp}_changelog.xml</diffChangeLogFile>
+                                <driver>org.h2.Driver</driver>
+                                <username>department</username>
+                                <password></password>
+                                <verbose>true</verbose>
+                                <logging>debug</logging>
+                                <contexts>!test</contexts>
+                            </configuration>
+                            <dependencies>
+                                <dependency>
+                                    <groupId>org.liquibase</groupId>
+                                    <artifactId>liquibase-core</artifactId>
+                                    <version>${liquibase.version}</version>
+                                </dependency>
+                                <dependency>
+                                    <groupId>com.h2database</groupId>
+                                    <artifactId>h2</artifactId>
+                                </dependency>
+                            </dependencies>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
+            </build>
+        </profile>
+    </profiles>
+
     <build>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>11</source> <!-- depending on your project -->
+                    <target>11</target> <!-- depending on your project -->
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.mapstruct</groupId>
+                            <artifactId>mapstruct-processor</artifactId>
+                            <version>${org.mapstruct.version}</version>
+                        </path>
+                        <!-- other annotation processors -->
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
-
 </project>
