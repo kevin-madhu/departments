@@ -94,6 +94,10 @@ public class DepartmentService {
         Department department = departmentRepository.findById(departmentUpdateDTO.getId())
                 .orElseThrow(() -> new IllegalArgumentException("Department not found."));
 
+        if(department.isSystem()) {
+            throw new IllegalArgumentException("The department cannot be updated because it's system generated.");
+        }
+
         if(departmentUpdateDTO.getDtFrom() != null) {
             if(department.getDtTill() != null) {
                 if(department.getDtTill().isBefore(departmentUpdateDTO.getDtFrom())) {
@@ -177,8 +181,14 @@ public class DepartmentService {
 
         if(departmentRepository.countDepartmentByParentId(id) > 0) {
             throw new IllegalArgumentException("The department cannot be deleted because it's not a leaf node.");
-        } else {
-            departmentRepository.deleteById(id);
         }
+
+        Department department = departmentRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Department not found."));
+        if(department.isSystem()) {
+            throw new IllegalArgumentException("The department cannot be deleted because it's system generated.");
+        }
+
+        departmentRepository.deleteById(id);
     }
 }

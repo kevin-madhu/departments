@@ -6,7 +6,7 @@ import ru.rivc_pulkovo.service.dto.DepartmentCreateDTO;
 import ru.rivc_pulkovo.service.dto.DepartmentDTO;
 
 /**
- * Mapper for the entity {@link Department} and its DTO {@link DepartmentDTO}.
+ * Mapper for the entity {@link Department} and its DTO {@link DepartmentCreateDTO}.
  */
 @Mapper(componentModel = "spring")
 public interface DepartmentCreateMapper extends EntityMapper<DepartmentCreateDTO, Department> {
