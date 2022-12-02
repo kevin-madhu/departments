@@ -2,6 +2,7 @@ package ru.rivc_pulkovo.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.List;
 import javax.persistence.*;
@@ -56,7 +57,6 @@ public class Department implements Serializable {
     @Column(name = "is_system")
     private boolean isSystem;
 
-    @NotNull
     @Column(name = "creation_date", nullable = false)
     @CreationTimestamp
     private ZonedDateTime creationDate;

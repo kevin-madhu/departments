@@ -6,8 +6,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.rivc_pulkovo.domain.Department;
 import ru.rivc_pulkovo.repository.DepartmentRepository;
+import ru.rivc_pulkovo.service.dto.DepartmentCreateDTO;
 import ru.rivc_pulkovo.service.dto.DepartmentDTO;
 import ru.rivc_pulkovo.service.dto.DepartmentUpdateDTO;
+import ru.rivc_pulkovo.service.mapper.DepartmentCreateMapper;
 import ru.rivc_pulkovo.service.mapper.DepartmentMapper;
 
 import java.time.ZonedDateTime;
@@ -29,27 +31,30 @@ public class DepartmentService {
 
     private final DepartmentMapper departmentMapper;
 
-    public DepartmentService(DepartmentRepository departmentRepository, DepartmentMapper departmentMapper) {
+    private final DepartmentCreateMapper departmentCreateMapper;
+
+    public DepartmentService(DepartmentRepository departmentRepository, DepartmentMapper departmentMapper,
+                             DepartmentCreateMapper departmentCreateMapper) {
         this.departmentRepository = departmentRepository;
         this.departmentMapper = departmentMapper;
+        this.departmentCreateMapper = departmentCreateMapper;
     }
 
-    public DepartmentDTO save(DepartmentDTO departmentDTO) {
-        log.debug("Request to save Department : {}", departmentDTO);
+    public DepartmentDTO save(DepartmentCreateDTO departmentCreateDTO) {
+        log.debug("Request to save Department : {}", departmentCreateDTO);
 
         if(departmentRepository.findDepartmentRootId() != null) {
             throw new IllegalArgumentException("The department tree can only have one root node.");
         }
 
-        if(departmentDTO.getDtTill().isBefore(departmentDTO.getDtFrom())) {
+        ZonedDateTime dtFrom = departmentCreateDTO.getDtFrom() != null ? departmentCreateDTO.getDtFrom() : ZonedDateTime.now();
+        if(departmentCreateDTO.getDtTill() != null && dtFrom.isAfter(departmentCreateDTO.getDtTill())) {
             throw new IllegalArgumentException("The department cannot be closed before it's opened.");
         }
 
-        Department department = departmentMapper.toEntity(departmentDTO);
-        department.setSystem(false);
-        department.setCreationDate(null);
-        department.setCorrectionDate(null);
-
+        Department department = departmentCreateMapper.toEntity(departmentCreateDTO)
+                .dtFrom(dtFrom)
+                .system(false);
         department = departmentRepository.save(department);
         return departmentMapper.toDto(department);
     }

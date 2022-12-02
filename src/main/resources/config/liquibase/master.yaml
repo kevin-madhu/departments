@@ -11,3 +11,6 @@ databaseChangeLog:
   - include:
       file: config/liquibase/changelog/1669967314_added_entity_constraints_Department.yaml
       relativeToChangelogFile: false
+  - include:
+      file: config/liquibase/changelog/1669978133_added_sequence_SequenceGenerator.yaml
+      relativeToChangelogFile: false

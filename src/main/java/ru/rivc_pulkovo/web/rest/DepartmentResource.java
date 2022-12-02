@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.rivc_pulkovo.repository.DepartmentRepository;
 import ru.rivc_pulkovo.service.DepartmentService;
+import ru.rivc_pulkovo.service.dto.DepartmentCreateDTO;
 import ru.rivc_pulkovo.service.dto.DepartmentDTO;
 import ru.rivc_pulkovo.service.dto.DepartmentUpdateDTO;
 
@@ -42,13 +43,11 @@ public class DepartmentResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/departments")
-    public ResponseEntity<DepartmentDTO> createDepartment(@Valid @RequestBody DepartmentDTO departmentDTO)
+    public ResponseEntity<DepartmentDTO> createDepartment(@Valid @RequestBody DepartmentCreateDTO departmentCreateDTO)
             throws URISyntaxException {
-        log.debug("REST request to save Department : {}", departmentDTO);
-        if (departmentDTO.getId() != null) {
-            throw new IllegalArgumentException("A new department cannot already have an ID" + ENTITY_NAME + "idexists");
-        }
-        DepartmentDTO result = departmentService.save(departmentDTO);
+        log.debug("REST request to save Department : {}", departmentCreateDTO);
+
+        DepartmentDTO result = departmentService.save(departmentCreateDTO);
         return ResponseEntity
                 .created(new URI("/api/departments/" + result.getId()))
                 .body(result);

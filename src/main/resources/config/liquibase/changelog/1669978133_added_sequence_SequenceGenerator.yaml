@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1669978133-1
+      author: kevin
+      changes:
+          - createSequence:
+              sequenceName: SEQUENCE_GENERATOR

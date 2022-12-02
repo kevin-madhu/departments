@@ -1,7 +1,6 @@
 package ru.rivc_pulkovo.service.dto;
 
 import javax.validation.constraints.Max;
-import javax.validation.constraints.NotNull;
 import java.time.ZonedDateTime;
 import java.util.Objects;
 
@@ -74,7 +73,7 @@ public class DepartmentUpdateDTO {
 
     @Override
     public String toString() {
-        return "Department{" +
+        return "DepartmentUpdateDTO{" +
                 "id=" + getId() +
                 ", dtFrom='" + getDtFrom() + "'" +
                 ", sortPriority='" + getSortPriority() + "'" +
