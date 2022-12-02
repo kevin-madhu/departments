@@ -38,7 +38,7 @@ public class DepartmentResource {
     /**
      * {@code POST  /payment-methods} : Create a new department.
      *
-     * @param departmentDTO the departmentDTO to create.
+     * @param departmentCreateDTO the departmentCreateDTO to create.
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new departmentDTO, or with status {@code 400 (Bad Request)} if the department has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
@@ -114,7 +114,7 @@ public class DepartmentResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the departmentDTO, or with status {@code 404 (Not Found)}.
      */
     @PatchMapping("/departments/{id}/close")
-    public ResponseEntity<DepartmentDTO> closeDepartment(@PathVariable Long id, @RequestParam ZonedDateTime dtTill) {
+    public ResponseEntity<DepartmentDTO> closeDepartment(@PathVariable Long id, @RequestParam(required = false) ZonedDateTime dtTill) {
         log.debug("REST request to delete Department : {}", id);
         DepartmentDTO departmentDTO = departmentService.close(id, dtTill);
         return ResponseEntity.ok(departmentDTO);

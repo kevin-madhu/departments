@@ -141,6 +141,10 @@ public class DepartmentService {
         Department department = departmentRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Department not found."));
 
+        if(department.getDtTill() != null) {
+            throw new IllegalArgumentException("The department is already closed.");
+        }
+
         ZonedDateTime actualDtTill = dtTill != null ? dtTill : ZonedDateTime.now();
         department.getSubDepartments().forEach(subDepartment -> {
             if(subDepartment.getDtTill() != null) {
