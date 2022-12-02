@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1669967314-1
+      author: kevin
+      changes:
+          - addColumn:
+              tableName: department
+              columns:
+                  - column:
+                        name: ancestor_id
+                        type: int
+                        constraints:
+                            nullable: true

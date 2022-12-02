@@ -8,6 +8,8 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 /**
  * A Department.
@@ -28,6 +30,9 @@ public class Department implements Serializable {
     @ManyToOne
     @JsonIgnoreProperties(value = { "parent" }, allowSetters = true)
     private Department parent;
+
+    @OneToOne
+    private Department ancestor;
 
     @NotNull
     @Column(name = "name", nullable = false)
@@ -53,9 +58,11 @@ public class Department implements Serializable {
 
     @NotNull
     @Column(name = "creation_date", nullable = false)
+    @CreationTimestamp
     private ZonedDateTime creationDate;
 
     @Column(name = "correction_date")
+    @UpdateTimestamp
     private ZonedDateTime correctionDate;
 
     public Long getId() {
@@ -82,6 +89,19 @@ public class Department implements Serializable {
 
     public void setParent(Department parent) {
         this.parent = parent;
+    }
+
+    public Department getAncestor() {
+        return ancestor;
+    }
+
+    public Department ancestor(Department ancestor) {
+        this.setAncestor(ancestor);
+        return this;
+    }
+
+    public void setAncestor(Department ancestor) {
+        this.ancestor = ancestor;
     }
 
     public String getName() {

@@ -13,6 +13,9 @@ public interface DepartmentRepository extends JpaRepository<Department, Long> {
 
     int countDepartmentByParentId(Long parentId);
 
+    @Query("SELECT d.id from Department d where d.parent.id is null")
+    Long findDepartmentRootId();
+
     @Query("SELECT d from Department d where d.dtFrom <= :particularDate and d.dtTill > :partticularDate")
     List<Department> findAllDepartsOnAParticularDate(ZonedDateTime particularDate);
 

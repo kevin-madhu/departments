@@ -21,10 +21,6 @@ import javax.annotation.PreDestroy;
 @Configuration
 @EnableCaching
 public class CacheConfiguration {
-
-    private GitProperties gitProperties;
-    private BuildProperties buildProperties;
-
     private final Logger log = LoggerFactory.getLogger(CacheConfiguration.class);
 
     private final Environment env;

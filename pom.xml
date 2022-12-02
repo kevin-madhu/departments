@@ -14,6 +14,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <org.mapstruct.version>1.5.3.Final</org.mapstruct.version>
         <liquibase.version>4.15.0</liquibase.version>
+        <liquibase-hibernate5.version>4.15.0</liquibase-hibernate5.version>
     </properties>
 
     <parent>
@@ -55,6 +56,11 @@
             <artifactId>hazelcast-spring</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-core</artifactId>
+            <version>${liquibase.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
             <scope>provided</scope>
@@ -89,38 +95,6 @@
                     <artifactId>h2</artifactId>
                 </dependency>
             </dependencies>
-            <build>
-                <pluginManagement>
-                    <plugins>
-                        <plugin>
-                            <groupId>org.liquibase</groupId>
-                            <artifactId>liquibase-maven-plugin</artifactId>
-                            <version>${liquibase.version}</version>
-                            <configuration>
-                                <changeLogFile>${project.basedir}/src/main/resources/config/liquibase/master.xml</changeLogFile>
-                                <diffChangeLogFile>${project.basedir}/src/main/resources/config/liquibase/changelog/${maven.build.timestamp}_changelog.xml</diffChangeLogFile>
-                                <driver>org.h2.Driver</driver>
-                                <username>department</username>
-                                <password></password>
-                                <verbose>true</verbose>
-                                <logging>debug</logging>
-                                <contexts>!test</contexts>
-                            </configuration>
-                            <dependencies>
-                                <dependency>
-                                    <groupId>org.liquibase</groupId>
-                                    <artifactId>liquibase-core</artifactId>
-                                    <version>${liquibase.version}</version>
-                                </dependency>
-                                <dependency>
-                                    <groupId>com.h2database</groupId>
-                                    <artifactId>h2</artifactId>
-                                </dependency>
-                            </dependencies>
-                        </plugin>
-                    </plugins>
-                </pluginManagement>
-            </build>
         </profile>
     </profiles>
 

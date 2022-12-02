@@ -16,6 +16,7 @@ import ru.rivc_pulkovo.service.mapper.DepartmentMapper;
 import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(MockitoExtension.class)
 public class DepartmentServiceTest {
@@ -46,6 +47,17 @@ public class DepartmentServiceTest {
         //Then
         assertNotNull(departmentDTO);
         Mockito.verify(departmentRepository, Mockito.times(1)).save(Mockito.any(Department.class));
+    }
+
+    @Test
+    @DisplayName("Tests that a department tree cannot have more than one root.")
+    public void testSave_whenSecondDepartmentRootDetailsProvided_returnsIllegalArgumentException() {
+        //Given
+        DepartmentDTO departmentDTO = new DepartmentDTO();
+        Mockito.when(departmentRepository.findDepartmentRootId()).thenReturn(new Random().nextLong());
+
+        //When && Then
+        assertThrows(IllegalArgumentException.class, () -> departmentService.save(departmentDTO));
     }
 
     @Test

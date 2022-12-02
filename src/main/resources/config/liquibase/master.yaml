@@ -5,3 +5,9 @@ databaseChangeLog:
   - include:
       file: config/liquibase/changelog/1669699108_added_entity_constraints_Department.yaml
       relativeToChangelogFile: false
+  - include:
+      file: config/liquibase/changelog/1669967314_modified_entity_Department.yaml
+      relativeToChangelogFile: false
+  - include:
+      file: config/liquibase/changelog/1669967314_added_entity_constraints_Department.yaml
+      relativeToChangelogFile: false
