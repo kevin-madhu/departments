@@ -1,6 +1,7 @@
 package ru.rivc_pulkovo.service.dto;
 
 import javax.validation.constraints.Max;
+import javax.validation.constraints.NotNull;
 import java.time.ZonedDateTime;
 import java.util.Objects;
 

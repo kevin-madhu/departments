@@ -12,6 +12,8 @@ public class DepartmentDTO {
 
     private Long parentId;
 
+    private Long ancestorId;
+
     private String name;
 
     private ZonedDateTime dtFrom;
@@ -40,6 +42,14 @@ public class DepartmentDTO {
 
     public void setParentId(Long parentId) {
         this.parentId = parentId;
+    }
+
+    public Long getAncestorId() {
+        return ancestorId;
+    }
+
+    public void setAncestorId(Long ancestorId) {
+        this.ancestorId = ancestorId;
     }
 
     public String getName() {

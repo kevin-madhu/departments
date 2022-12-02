@@ -9,9 +9,11 @@ import ru.rivc_pulkovo.service.dto.DepartmentDTO;
  */
 @Mapper(componentModel = "spring")
 public interface DepartmentMapper extends EntityMapper<DepartmentDTO, Department> {
-    //@Mapping(target = "parentId", source = "parent.id")
+    @Mapping(target = "parentId", source = "parent.id")
+    @Mapping(target = "ancestorId", source = "ancestor.id")
     DepartmentDTO toDto(Department s);
 
-    //@Mapping(target = "parent.id", source = "parentId")
+    @Mapping(target = "parent.id", source = "parentId")
+    @Mapping(target = "ancestor.id", source = "ancestorId")
     Department toEntity(DepartmentDTO d);
 }
