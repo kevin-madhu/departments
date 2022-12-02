@@ -107,6 +107,17 @@ public class DepartmentResource {
     }
 
     /**
+     * {@code GET  /departments} : get all the departments in a tree.
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of departments in body.
+     */
+    @GetMapping("/departments/{id}/tree")
+    public List<DepartmentDTO> getDepartmentsHierarchy(@PathVariable Long id, @RequestParam(required = false) ZonedDateTime particularDate) {
+        log.debug("REST request to get all Departments in hierarchy.");
+        return departmentService.getHierarchy(id, particularDate);
+    }
+
+    /**
      * {@code PATCH  /departments/:id/close} : close the "id" department.
      *
      * @param id the id of the department to close.

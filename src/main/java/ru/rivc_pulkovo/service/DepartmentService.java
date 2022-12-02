@@ -164,13 +164,19 @@ public class DepartmentService {
     /**
      * Get department tree as on a particular date.
      *
-     * @param date the particular date on which the tree is to be retrieved.
+     * @param parentId the parentId for which the tree is to be retrieved.
+     * @param particularDate the particular date on which the tree is to be retrieved.
      * @return the entity.
      */
     @Transactional(readOnly = true)
-    public List<DepartmentDTO> readTree(ZonedDateTime date) {
-        log.debug("Request to get Department tree as on : {}", date);
-        return departmentRepository.findAllDepartsOnAParticularDate(date)
+    public List<DepartmentDTO> getHierarchy(Long parentId, ZonedDateTime particularDate) {
+        log.debug("Request to get Department tree as on : {}", particularDate);
+
+        if (particularDate == null) {
+            particularDate = ZonedDateTime.now();
+        }
+
+        return departmentRepository.getAllByHierarchy(parentId, particularDate)
                 .stream().map(departmentMapper::toDto)
                 .collect(Collectors.toCollection(LinkedList::new));
     }
