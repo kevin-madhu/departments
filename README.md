@@ -22,3 +22,5 @@ curl --location --request POST 'http://localhost:9080/auth/realms/rivc/protocol/
 --data-urlencode 'scope=openid profile'
 
 The access_token recieved as a response from this could be added as Bearer tokens to further requests to the project for authorization.
+
+A postman collection could be imported to Postman from file departments.postman_collection.json

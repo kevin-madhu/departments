@@ -1,0 +1,306 @@
+{
+	"info": {
+		"_postman_id": "52b54a4c-358f-45bc-a228-f3cad68b38c4",
+		"name": "Departments Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "715591"
+	},
+	"item": [
+		{
+			"name": "departments",
+			"item": [
+				{
+					"name": "List of all departments",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJEVVZKamhnYWZ2Z1ZZeEhGN19NY1M5SUNQd25ucGh2OTBPX2hoNl84VWFvIn0.eyJleHAiOjE2NzAyODc5OTQsImlhdCI6MTY3MDI1MjAxMiwiYXV0aF90aW1lIjoxNjcwMjUxOTk0LCJqdGkiOiJkZmI3NDNhNS1hMWRjLTQ1NDQtYTg3MS01ZWUyNWZkZWVjMjMiLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjkwODAvYXV0aC9yZWFsbXMvcml2YyIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiI4ZTFiMmMzNC04YWFiLTRmZTctYWZkZS1lOTM5ZDM4MWIyYjAiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJyaXZjLWNsaWVudCIsInNlc3Npb25fc3RhdGUiOiJjMTgyMmQ2NC0yNDY2LTQwYTQtOWI1OS0wZWFiNzk3MDJhYzYiLCJhY3IiOiIxIiwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6Im9wZW5pZCBlbWFpbCBwcm9maWxlIiwic2lkIjoiYzE4MjJkNjQtMjQ2Ni00MGE0LTliNTktMGVhYjc5NzAyYWM2IiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJBbGV4ZXkgS2Ftc2t5IiwicHJlZmVycmVkX3VzZXJuYW1lIjoiYWxleGV5LmthbXNreSIsImdpdmVuX25hbWUiOiJBbGV4ZXkiLCJmYW1pbHlfbmFtZSI6IkthbXNreSIsImVtYWlsIjoiYWxleGV5LmthbXNreUByaXZjLXB1bGtvdm8ucnUifQ.TTEFQYeEazMq5w6J01aFcueeeUp8LMQghZeIEZKc4woAE3vwSWpND_IiJpM9aMX2j93XycTAUu8M8mqj01AZf0PCIJKTvEy11Ifdcq0gkj33WtDtdNqA2eGrpVO_Ed-5h1-JChnh4yr5i0viWHWoS-x2IHRoSB4HqBHjgUBDTUqoTxXHkDzzlv2k8ZEPyq9elEdYOEh9RyL4rYyImMVJIQTONfch_tV71wgJ4PUp3ypaqoGePfAIcoXch7nLftBoEk3nN1aZ0X9lNaoXNlx9zxVbZJ2fa7sXe-uC8HgUQqcEngYmjM1ZPGeu-Z6MRxBIjtQc8aR503unmmDV1QITdw",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/departments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"departments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a department",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Ministry of Internal Affairs of the Russian Federation\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/departments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"departments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View a department",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/departments/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"departments",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View a department tree",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/departments/1/tree",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"departments",
+								"1",
+								"tree"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a department",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/departments/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"departments",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Close a department",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/departments/1/close",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"departments",
+								"1",
+								"close"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a department",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"name\": \"Internal Affairs Ministry of the Russian Federation\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/departments/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"departments",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Get Authorization Code",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9080/auth/realms/rivc/protocol/openid-connect/auth?client_id=rivc-client&redirect_uri=http://localhost:8085&response_type=code&scope=openid profile&state=12345",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9080",
+					"path": [
+						"auth",
+						"realms",
+						"rivc",
+						"protocol",
+						"openid-connect",
+						"auth"
+					],
+					"query": [
+						{
+							"key": "client_id",
+							"value": "rivc-client"
+						},
+						{
+							"key": "redirect_uri",
+							"value": "http://localhost:8085"
+						},
+						{
+							"key": "response_type",
+							"value": "code"
+						},
+						{
+							"key": "scope",
+							"value": "openid profile"
+						},
+						{
+							"key": "state",
+							"value": "12345"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get access token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
+							"var jsonData = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"bearerToken\", jsonData.access_token);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "authorization_code",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "rivc-client",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "changeit",
+							"type": "text"
+						},
+						{
+							"key": "code",
+							"value": "78fdf54a-ed97-430c-a61e-c48fabb0b8e4.c1822d64-2466-40a4-9b59-0eab79702ac6.120c6c00-bc60-44da-9d84-3a986088f572",
+							"type": "text"
+						},
+						{
+							"key": "redirect_uri",
+							"value": "http://localhost:8085",
+							"type": "text"
+						},
+						{
+							"key": "scope",
+							"value": "openid profile",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:9080/auth/realms/rivc/protocol/openid-connect/token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9080",
+					"path": [
+						"auth",
+						"realms",
+						"rivc",
+						"protocol",
+						"openid-connect",
+						"token"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
