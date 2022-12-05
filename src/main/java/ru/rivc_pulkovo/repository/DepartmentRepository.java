@@ -39,7 +39,7 @@ public interface DepartmentRepository extends JpaRepository<Department, Long> {
              FROM Subdepartments s
             INNER JOIN Department d ON s.id = d.parent_id
         )
-        SELECT * FROM Subdepartments s WHERE(s.dt_from <= :particularDate AND s.dt_till > :particularDate)""", nativeQuery = true
+        SELECT * FROM Subdepartments s WHERE(s.dt_from <= :particularDate AND (s.dt_till IS null OR (s.dt_till > :particularDate)))""", nativeQuery = true
     )
     List<Department> getAllByHierarchyOnAParticularDate(@Param("id") Long id,
                                        @Param("particularDate") ZonedDateTime particularDate);
