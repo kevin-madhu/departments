@@ -17,22 +17,30 @@ public interface DepartmentRepository extends JpaRepository<Department, Long> {
     @Query("SELECT d.id from Department d where d.parent.id is null")
     Long findDepartmentRootId();
 
-    //TODO - Query needs to be fixed!!!
     @Query(value = """
-        WITH RECURSIVE subdepartments AS (
-        SELECT
-            *
-        FROM
-            Department d
-        WHERE
-            id = :parentId
-        UNION
-            SELECT
-                *
-            FROM
-                Department d
-            INNER JOIN subdepartments s ON d.parent_id = d.id
-        ) SELECT * FROM subdepartments s WHERE(s.dt_from <= :particularDate AND s.dt_till > :particularDate)""", nativeQuery = true)
-    List<Department> getAllByHierarchy(@Param("parentId") Long parentId,
+        WITH RECURSIVE Subdepartments(id, parent_id, ancestor_id, name, dt_from, dt_till, sort_priority, is_system, creation_date, correction_date) AS (
+            SELECT id, parent_id, ancestor_id, name, dt_from, dt_till, sort_priority, is_system, creation_date, correction_date
+             FROM Department WHERE id = :id
+                UNION
+            SELECT d.id, d.parent_id, d.ancestor_id, d.name, d.dt_from, d.dt_till, d.sort_priority, d.is_system, d.creation_date, d.correction_date
+             FROM Subdepartments s
+            INNER JOIN Department d ON s.id = d.parent_id
+        )
+        SELECT * FROM Subdepartments""", nativeQuery = true
+    )
+    List<Department> getAllByHierarchy(@Param("id") Long id);
+
+    @Query(value = """
+        WITH RECURSIVE Subdepartments(id, parent_id, ancestor_id, name, dt_from, dt_till, sort_priority, is_system, creation_date, correction_date) AS (
+            SELECT id, parent_id, ancestor_id, name, dt_from, dt_till, sort_priority, is_system, creation_date, correction_date
+             FROM Department WHERE id = :id
+                UNION
+            SELECT d.id, d.parent_id, d.ancestor_id, d.name, d.dt_from, d.dt_till, d.sort_priority, d.is_system, d.creation_date, d.correction_date
+             FROM Subdepartments s
+            INNER JOIN Department d ON s.id = d.parent_id
+        )
+        SELECT * FROM Subdepartments s WHERE(s.dt_from <= :particularDate AND s.dt_till > :particularDate)""", nativeQuery = true
+    )
+    List<Department> getAllByHierarchyOnAParticularDate(@Param("id") Long id,
                                        @Param("particularDate") ZonedDateTime particularDate);
 }

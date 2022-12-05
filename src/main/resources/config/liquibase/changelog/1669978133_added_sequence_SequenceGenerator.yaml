@@ -5,3 +5,5 @@ databaseChangeLog:
       changes:
           - createSequence:
               sequenceName: SEQUENCE_GENERATOR
+              startValue: 50
+              incrementBy: 50

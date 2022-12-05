@@ -1,3 +1,0 @@
-spring:
-  liquibase:
-    change-log: config/liquibase/master.yaml

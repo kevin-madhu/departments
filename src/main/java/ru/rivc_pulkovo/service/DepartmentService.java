@@ -8,6 +8,7 @@ import ru.rivc_pulkovo.domain.Department;
 import ru.rivc_pulkovo.repository.DepartmentRepository;
 import ru.rivc_pulkovo.service.dto.DepartmentCreateDTO;
 import ru.rivc_pulkovo.service.dto.DepartmentDTO;
+import ru.rivc_pulkovo.service.dto.DepartmentReadTreeDTO;
 import ru.rivc_pulkovo.service.dto.DepartmentUpdateDTO;
 import ru.rivc_pulkovo.service.mapper.DepartmentCreateMapper;
 import ru.rivc_pulkovo.service.mapper.DepartmentMapper;
@@ -164,19 +165,34 @@ public class DepartmentService {
     /**
      * Get department tree as on a particular date.
      *
-     * @param parentId the parentId for which the tree is to be retrieved.
+     * @param id the parentId for which the tree is to be retrieved.
+     * @return the entity.
+     */
+    @Transactional(readOnly = true)
+    public List<DepartmentDTO> getHierarchy(Long id) {
+        log.debug("Request to read hierarchy tree of Department : {}", id);
+
+        return departmentRepository.getAllByHierarchy(id)
+                .stream().map(departmentMapper::toDto)
+                .collect(Collectors.toCollection(LinkedList::new));
+    }
+
+    /**
+     * Get department tree as on a particular date.
+     *
+     * @param id the parentId for which the tree is to be retrieved.
      * @param particularDate the particular date on which the tree is to be retrieved.
      * @return the entity.
      */
     @Transactional(readOnly = true)
-    public List<DepartmentDTO> getHierarchy(Long parentId, ZonedDateTime particularDate) {
-        log.debug("Request to get Department tree as on : {}", particularDate);
+    public List<DepartmentDTO> getHierarchy(Long id, DepartmentReadTreeDTO departmentReadTreeDTO) {
+        log.debug("Request to get Department tree as on : {}", departmentReadTreeDTO);
 
-        if (particularDate == null) {
-            particularDate = ZonedDateTime.now();
+        if (departmentReadTreeDTO.getParticularDate() == null) {
+            throw new IllegalArgumentException("Particular date cannot be null!");
         }
 
-        return departmentRepository.getAllByHierarchy(parentId, particularDate)
+        return departmentRepository.getAllByHierarchyOnAParticularDate(id, departmentReadTreeDTO.getParticularDate())
                 .stream().map(departmentMapper::toDto)
                 .collect(Collectors.toCollection(LinkedList::new));
     }

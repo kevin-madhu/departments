@@ -2,7 +2,6 @@ package ru.rivc_pulkovo.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.List;
 import javax.persistence.*;
@@ -223,7 +222,7 @@ public class Department implements Serializable {
     public String toString() {
         return "Department{" +
                 "id=" + getId() +
-                ", parentId='" + getParent().id + "'" +
+                ", parent='" + getParent() + "'" +
                 ", dtFrom='" + getDtFrom() + "'" +
                 ", dtTill='" + getDtTill() + "'" +
                 ", sortPriority='" + getSortPriority() + "'" +

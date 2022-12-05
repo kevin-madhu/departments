@@ -16,6 +16,7 @@ import ru.rivc_pulkovo.repository.DepartmentRepository;
 import ru.rivc_pulkovo.service.DepartmentService;
 import ru.rivc_pulkovo.service.dto.DepartmentCreateDTO;
 import ru.rivc_pulkovo.service.dto.DepartmentDTO;
+import ru.rivc_pulkovo.service.dto.DepartmentReadTreeDTO;
 import ru.rivc_pulkovo.service.dto.DepartmentUpdateDTO;
 
 /**
@@ -112,9 +113,14 @@ public class DepartmentResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of departments in body.
      */
     @GetMapping("/departments/{id}/tree")
-    public List<DepartmentDTO> getDepartmentsHierarchy(@PathVariable Long id, @RequestParam(required = false) ZonedDateTime particularDate) {
+    public List<DepartmentDTO> getDepartmentsHierarchy(@PathVariable Long id,
+                                                       @Valid @RequestBody(required = false) DepartmentReadTreeDTO departmentReadTreeDTO) {
         log.debug("REST request to get all Departments in hierarchy.");
-        return departmentService.getHierarchy(id, particularDate);
+        if(departmentReadTreeDTO != null) {
+            return departmentService.getHierarchy(id, departmentReadTreeDTO);
+        }
+
+        return departmentService.getHierarchy(id);
     }
 
     /**
