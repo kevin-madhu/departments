@@ -3,4 +3,5 @@
 3. Write integration tests
 4. Add README for the project explaining stuff
 5. Share Postman collection with the requests
-6. Cleanup (bugfixes and more features)
+6. Clean up pom.xml
+7. Cleanup (bugfixes and more features)
