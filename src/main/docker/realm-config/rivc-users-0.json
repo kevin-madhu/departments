@@ -1,0 +1,33 @@
+{
+  "realm": "rivc",
+  "users": [
+    {
+      "id": "4c973896-5761-41fc-8217-07c5d13a004b",
+      "createdTimestamp": 1505479415590,
+      "username": "alexey.kamsky",
+      "enabled": true,
+      "totp": false,
+      "emailVerified": true,
+      "firstName": "Alexey",
+      "lastName": "Kamsky",
+      "email": "alexey.kamsky@rivc-pulkovo.ru",
+      "credentials": [
+        {
+          "id": "b860462b-9b02-48ba-9523-d3a8926a917b",
+          "type": "password",
+          "createdDate": 1505479429154,
+          "secretData": "{\"value\":\"4pf9K2jWSCcHC+CwsZP/qidN5pSmDUe6AX6wBerSGdBVKkExay8MWKx+EKmaaObZW6FVsD8vdW/ZsyUFD9gJ1Q==\",\"salt\":\"1/qNkZ5kr77jOMOBPBogGw==\"}",
+          "credentialData": "{\"hashIterations\":27500,\"algorithm\":\"pbkdf2-sha256\"}"
+        }
+      ],
+      "disableableCredentialTypes": [],
+      "requiredActions": [],
+      "realmRoles": ["offline_access", "uma_authorization"],
+      "clientRoles": {
+        "account": ["view-profile", "manage-account"]
+      },
+      "notBefore": 0,
+      "groups": []
+    }
+  ]
+}

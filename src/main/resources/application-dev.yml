@@ -10,3 +10,15 @@ spring:
       auto-commit: false
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
+
+  security:
+    oauth2:
+      resource-server:
+        jwt:
+          issuer-uri: http://localhost:9080/auth/realms/rivc
+      client:
+        registration:
+          oidc:
+            client-id: rivc-client
+            client-secret: changeit
+            scope: openid,profile
